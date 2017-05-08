@@ -64,11 +64,6 @@ print(g_star.pop(), 'after {0} iterations'.format(t))
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 
-ax.set_xlabel('X')
-ax.set_ylabel('Y')
-ax.set_zlabel('Z')
-ax.set_zlim(0, 3)
-
 # plotting the function
 X, Y = np.meshgrid(np.arange(XMIN, XMAX, 0.25), np.arange(YMIN, YMAX, 0.25))
 Z = f([X, Y])
@@ -80,6 +75,9 @@ def animate(i):
     ax.clear()
     ax.set_xlim(XMIN, XMAX)
     ax.set_ylim(YMIN, YMAX)
+    ax.set_xlabel('x')
+    ax.set_ylabel('y')
+    ax.set_zlabel('z')
     ax.plot_surface(X, Y, Z, cmap=cm.coolwarm, linewidth=0, antialiased=True, alpha=0.5)
     ax.scatter(xs, ys, zs, c='k', marker='o')
 
