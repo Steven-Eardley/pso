@@ -1,5 +1,4 @@
 from setuptools import setup, find_packages
-import sys
 
 setup(
     name = 'pso',
@@ -7,9 +6,9 @@ setup(
     packages = find_packages(),
     install_requires = [
         "ipython",
-	"numpy",
-	"matplotlib",
-	"mako",
+        "numpy",
+        "matplotlib",
+        "mako",
         "pyopencl",
     ],
     url = 'http://eardley.xyz',

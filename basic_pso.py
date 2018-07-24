@@ -9,17 +9,23 @@ import numpy as np
 
 
 def f(v):
-    # local maxima f=1 at (-4,4) and (4,4) but equal global maxima at (0,0) and (0,-4)
+    """ Four peaks evaluation function:
+    local maxima f=1 at (-4,4) and (4,4) but equal global maxima at (0,0) and (0,-4)
+    """
     [x, y] = v
     return np.exp(-(x-4)**2 - (y-4)**2) + np.exp(-(x+4)**2 - (y-4)**2) + (2 * np.exp(-x**2 - (y+4)**2)) + (2 * np.exp(-x**2 - y**2))
 
+
+# PSO constants
 N_PARTICLES = 20
 MAX_ITERATIONS = 100
-XMIN = YMIN = ZMIN = -6
-XMAX = YMAX = ZMAX = 6
 ALPHA = 0.6                                                                                      # acceleration constant
 BETA = 0.4                                                                                       # acceleration constant
 THETA = 0.5                                                                                           # inertia constant
+
+# Constants for plotting and initialisation
+XMIN = YMIN = ZMIN = -6
+XMAX = YMAX = ZMAX = 6
 
 # PSO initialisation
 t = 0
@@ -64,11 +70,8 @@ print(g_star.pop(), 'after {0} iterations'.format(t))
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 
-# plotting the function
-X, Y = np.meshgrid(np.arange(XMIN, XMAX, 0.25), np.arange(YMIN, YMAX, 0.25))
-Z = f([X, Y])
 
-
+# Plotting the function
 def animate(i):
     [xs, ys] = x[i].T
     zs = np.apply_along_axis(f, 1, x[i]).tolist()
@@ -80,6 +83,10 @@ def animate(i):
     ax.set_zlabel('z')
     ax.plot_surface(X, Y, Z, cmap=cm.coolwarm, linewidth=0, antialiased=True, alpha=0.5)
     ax.scatter(xs, ys, zs, c='k', marker='o')
+
+
+X, Y = np.meshgrid(np.arange(XMIN, XMAX, 0.25), np.arange(YMIN, YMAX, 0.25))
+Z = f([X, Y])
 
 ani = animation.FuncAnimation(fig, animate, interval=500, frames=t, repeat=False)
 plt.show()
